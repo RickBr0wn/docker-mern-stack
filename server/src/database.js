@@ -1,6 +1,5 @@
-const mongoose = require('mongoose');
-const dotenv = require('dotenv');
-dotenv.config();
+require('dotenv').config()
+const mongoose = require('mongoose')
 
 // mongoose options
 const options = {
@@ -11,24 +10,29 @@ const options = {
   autoIndex: false,
   poolSize: 10,
   bufferMaxEntries: 0,
-};
+}
 
 // mongodb environment variables
-const { MONGO_HOSTNAME, MONGO_DB, MONGO_PORT } = process.env;
+const { MONGO_HOSTNAME, MONGO_DB, MONGO_PORT } = process.env
 
+// create the connection string
 const dbConnectionURL = {
   LOCALURL: `mongodb://${MONGO_HOSTNAME}:${MONGO_PORT}/${MONGO_DB}`,
-};
-mongoose.connect(dbConnectionURL.LOCALURL, options);
-const db = mongoose.connection;
+}
+// connect to the database
+mongoose.connect(dbConnectionURL.LOCALURL, options)
+// create a database instance
+const db = mongoose.connection
+// check database instance for `error` event
 db.on(
   'error',
   console.error.bind(
     console,
     'Mongodb Connection Error:' + dbConnectionURL.LOCALURL
   )
-);
+)
+// check database instance for `open` event
 db.once('open', () => {
-  // we're connected !
-  console.log('Mongodb Connection Successful');
-});
+  // database connected
+  console.log('Mongodb Connection Successful')
+})
