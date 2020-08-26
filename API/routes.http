@@ -1,0 +1,41 @@
+@host = http://localhost:8080/posts
+
+// get all posts
+GET {{host}} HTTP/1.1 
+Content-Type: application/json
+
+###
+
+// create a new post
+POST {{host}} HTTP/1.1
+Content-Type: application/json
+
+{
+  "title": "third_post",
+  "body": "the third post",
+  "author": "rick brown"
+}
+
+###
+
+// get a single post using a post id
+GET {{host}}/5f45ad3988d9fdabb544a650 HTTP/1.1
+Content-Type: application/json
+
+###
+
+// edit a single post using a post id
+PATCH {{host}}/5f45ad3988d9fdabb544a650 HTTP/1.1
+Content-Type: application/json
+
+{
+  "body": "this body has been edited via patch"
+}
+
+###
+
+// delete a post unsing a post id
+DELETE {{host}}/5f45af4188d9fdabb544a652 HTTP/1.1
+Content-Type: application/json
+
+###
